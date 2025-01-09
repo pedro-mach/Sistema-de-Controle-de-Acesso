@@ -1,6 +1,7 @@
 import peewee
 import bcrypt
 from create_db import *
+from lib import *
 
 db = peewee.SqliteDatabase('Acess_Control.db')
 
@@ -23,7 +24,7 @@ def adicionar_usuario():
     try:
         with db.atomic():
             username = input("Nome de Usuário: ")
-            cargo = input("Qual o Cargo: ")
+            cargo_usuario = cargo()
             senha = input("Qual a senha: ")
             liberation = input("Liberação (True/False): ")
             liberation = liberation.lower()
@@ -37,7 +38,7 @@ def adicionar_usuario():
             
             Usuario.create(
                 username=username,
-                cargo=cargo,
+                cargo=cargo_usuario,
                 senha=senha_hash,
                 permissao=liberation
             )
@@ -56,25 +57,37 @@ def fazer_login():
         if verificar_senha(senha, usuario.senha):
             sessao_ativa['usuario_id'] = usuario.id
             print("Login bem-sucedido!")
-            # while sessao_ativa:
-            #     # Lógica da aplicação
+            while True:
+                if usuario.cargo == 'Administração':
+                    opcao = menu_admin()
+                    if opcao == 1:
+                        adicionar_usuario()
+                    elif opcao == 4:
+                        acess_port(usuario)
+                    elif opcao == 5:
+                        break
+                else:
+                    acess_port(usuario)
+                    break
+
         else:
             print("Senha incorreta.")
     except Usuario.DoesNotExist:
         print("Usuário não encontrado.")
 
-def acess_port():
-    
+# def var_admin(usuario):
+#   if usuario.cargo == admin
 
 
 if __name__ == '__main__':
     db.create_tables([Usuario])
-
+    tittle_('TRABALHO APS 1.0')
     while True:
-        opcao = input("Digite 'a' para adicionar usuário ou 'l' para fazer login: ")
-        if opcao == 'a':
-            adicionar_usuario()
-        elif opcao == 'l':
+        opcao = menu(['Fazer Login', 'Sair'])
+        if opcao == 1:
             fazer_login()
+        elif opcao == 2:
+            print("Saindo ...")
+            break
         else:
             print("Opção inválida.")
