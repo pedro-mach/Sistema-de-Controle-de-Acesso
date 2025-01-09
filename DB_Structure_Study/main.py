@@ -30,7 +30,7 @@ def adicionar_usuario():
             liberation = liberation.lower()
 
             # Validação básica
-            if not all([username, cargo, senha]):
+            if not all([username, senha]):
                 print("Todos os campos são obrigatórios.")
                 return
 
@@ -62,6 +62,10 @@ def fazer_login():
                     opcao = menu_admin()
                     if opcao == 1:
                         adicionar_usuario()
+                    elif opcao == 2:
+                        edit_user_from_db()
+#                    elif opcao == 3:
+#                        delete_user_from_db()    
                     elif opcao == 4:
                         acess_port(usuario)
                     elif opcao == 5:

@@ -1,3 +1,6 @@
+import peewee
+from create_db import *
+
 def linha(tam = 42):
     return '-' * tam
 
@@ -36,6 +39,14 @@ def cargo():
 def menu_admin():
     opcao = menu(['Criar usuario', 'Modificar usuario', 'Apagar usuario', 'Abrir porta', 'Logoff'])
     return opcao
+
+def edit_user_from_db():
+    username = input("Nome de Usuário: ")
+    usuario = Usuario.get(Usuario.username == username)
+    print(f'Segue as informações do usuario: {usuario.username}')
+    print(f'Username: {usuario.username} || Cargo: {usuario.cargo} || Liberação: {usuario.permissao} ')
+    #menu campo alterar
+    
 
 
 
