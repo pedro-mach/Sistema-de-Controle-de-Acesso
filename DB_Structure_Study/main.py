@@ -79,9 +79,6 @@ def fazer_login():
     except Usuario.DoesNotExist:
         print("Usuário não encontrado.")
 
-# def var_admin(usuario):
-#   if usuario.cargo == admin
-
 
 if __name__ == '__main__':
     db.create_tables([Usuario])

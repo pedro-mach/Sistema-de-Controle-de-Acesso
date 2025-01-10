@@ -1,5 +1,6 @@
 import peewee
 from create_db import *
+from main import criar_hash
 
 def linha(tam = 42):
     return '-' * tam
@@ -45,7 +46,35 @@ def edit_user_from_db():
     usuario = Usuario.get(Usuario.username == username)
     print(f'Segue as informações do usuario: {usuario.username}')
     print(f'Username: {usuario.username} || Cargo: {usuario.cargo} || Liberação: {usuario.permissao} ')
-    #menu campo alterar
+    opc = menu(['Modificar usarname', 'Modificar Senha', 'Mudar Cargo', 'Mudar Liberação', 'Apagar Usuario'])
+    if opc == 1:
+        new_username = input("Nome de Usuário: ")
+        usuario.username = new_username
+        usuario.save()
+        
+    elif opc == 2:
+        new_pssw = input("Nova senha: ")
+        senha = criar_hash(new_pssw)
+        usuario.senha = senha
+        usuario.save()
+        
+    elif opc == 3:
+        new_cargo = cargo()
+        usuario.cargo = new_cargo
+        usuario.save()  
+        
+    elif opc == 4: # corrigir
+        new_liberacao = input("Liberação (True/False): ")
+        liberation = new_liberacao.lower()
+        usuario.permissao = liberation
+        usuario.save()
+    
+    elif opc == 5:
+        usuario.delete_instance()
+        print("Usuário deletado com sucesso!")
+        
+    else:
+       print('Opção Invalida')
     
 
 
