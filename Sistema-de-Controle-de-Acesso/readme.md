@@ -11,4 +11,4 @@ Este projeto implementa um sistema básico de controle de acesso utilizando Pyth
 ## Instalação
 1. **Clone o repositório:**
    ```bash
-   git clone https://[seu_repositorio]
+   git clone https://github.com/pedro-mach/Sistema-de-Controle-de-Acesso
