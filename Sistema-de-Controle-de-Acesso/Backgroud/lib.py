@@ -1,5 +1,5 @@
 import peewee
-from create_db import *
+from Backgroud.create_db import *
 from main import criar_hash
 
 def linha(tam = 42):
@@ -34,11 +34,22 @@ def menu(lista):
     return opc
 
 def cargo():
-    opcao = menu(['Administração', 'Funcionário'])
-    return 'Administração' if opcao == 1 else 'Funcionário'
+    opc = menu(['Administração', 'Funcionário','Estagiario', 'Pesquisador', 'Analista'])
+    if opc == 1:
+        opc = 'Administração'
+    elif opc == 2:
+        opc = 'Funcionário'
+    elif opc == 3:
+        opc = 'Estagiario'
+    elif opc == 4:
+        opc = 'Pesquisador'
+    else:
+        opc = 'Analista'
+    return opc
 
 def menu_admin():
-    opcao = menu(['Criar usuario', 'Modificar usuario', 'Apagar usuario', 'Abrir porta', 'Logoff'])
+    opcao = menu(['Criar usuario', 'Modificar usuario', 'Abrir porta', 'Logoff'])
+    print(linha())
     return opcao
 
 def edit_user_from_db():
@@ -66,6 +77,12 @@ def edit_user_from_db():
     elif opc == 4: # corrigir
         new_liberacao = input("Liberação (True/False): ")
         liberation = new_liberacao.lower()
+        if liberation == 'false':
+            liberation = 0
+        elif liberation == 'true':
+            liberation = 1
+        else:
+            print("Tente novamente")
         usuario.permissao = liberation
         usuario.save()
     

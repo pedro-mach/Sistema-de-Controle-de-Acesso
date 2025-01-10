@@ -1,6 +1,6 @@
 import peewee
 
-db = peewee.SqliteDatabase('Acess_Control.db')
+db = peewee.SqliteDatabase('./Backgroud/Acess_Control.db')
 
 class Usuario(peewee.Model):
     username = peewee.CharField()

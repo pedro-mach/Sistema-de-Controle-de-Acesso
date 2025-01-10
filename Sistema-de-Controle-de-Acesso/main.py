@@ -1,7 +1,9 @@
+# pip install peewee
+# pip install bcrypt
 import peewee
 import bcrypt
-from create_db import *
-from lib import *
+from Backgroud.create_db import *
+from Backgroud.lib import *
 
 db = peewee.SqliteDatabase('Acess_Control.db')
 
@@ -63,12 +65,10 @@ def fazer_login():
                     if opcao == 1:
                         adicionar_usuario()
                     elif opcao == 2:
-                        edit_user_from_db()
-#                    elif opcao == 3:
-#                        delete_user_from_db()    
-                    elif opcao == 4:
+                        edit_user_from_db()    
+                    elif opcao == 3:
                         acess_port(usuario)
-                    elif opcao == 5:
+                    elif opcao == 4:
                         break
                 else:
                     acess_port(usuario)
